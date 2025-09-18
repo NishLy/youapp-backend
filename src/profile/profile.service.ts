@@ -8,7 +8,7 @@ import { calculateHoroscope, calculateZodiac } from 'src/utils/zodiac/helper';
 import { hashPassword } from 'src/utils/hash';
 
 @Injectable()
-export class profileService {
+export class ProfileService {
   constructor(
     @InjectModel(Profile.name) private profileModel: Model<ProfileDocument>,
   ) {}
@@ -22,6 +22,36 @@ export class profileService {
 
   async findByUserId(userId: string): Promise<Profile> {
     const profile = await this.profileModel.findOne({ userId }).exec();
+    if (!profile) throw new NotFoundException('Profile not found');
+    return profile;
+  }
+
+  async findByEmail(email: string, includePassword?: boolean) {
+    let query = this.profileModel.findOne({ email });
+
+    if (includePassword) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      query = query.select('+password');
+    }
+
+    const profile = await query.exec();
+
+    if (!profile) {
+      throw new NotFoundException('Profile not found');
+    }
+
+    return profile;
+  }
+
+  async findByUserName(userName: string, includePassword?: boolean) {
+    let query = this.profileModel.findOne({ userName });
+
+    if (includePassword) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      query = query.select('+password');
+    }
+
+    const profile = await query.exec();
     if (!profile) throw new NotFoundException('Profile not found');
     return profile;
   }

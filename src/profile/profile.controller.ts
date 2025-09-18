@@ -1,14 +1,24 @@
-import { Controller, Post, Get, Put, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Put,
+  Body,
+  Param,
+  BadRequestException,
+} from '@nestjs/common';
 import { CreateProfileDto } from './dtos/profile.create.dto';
-import { profileService } from './profile.service';
+import { ProfileService } from './profile.service';
 import { UpdateProfileDto } from './dtos/profile.update.dto';
 
 @Controller('api')
 export class ProfileController {
-  constructor(private readonly profileService: profileService) {}
+  constructor(private readonly profileService: ProfileService) {}
 
   @Post('register')
   create(@Body() createProfileDto: CreateProfileDto) {
+    if (createProfileDto.confirmPassword !== createProfileDto.password)
+      throw new BadRequestException("Confirmation Password doesn't match");
     return this.profileService.create(createProfileDto);
   }
 
