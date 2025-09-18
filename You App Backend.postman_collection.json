@@ -330,6 +330,20 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Message",
+			"item": [
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "## Send Message API\n\nThis endpoint allows users to send a message to a specified recipient within a conversation. It is designed to facilitate communication by enabling the transmission of text messages.\n\n### Request\n\n**Method:** POST  \n**Endpoint:** `{{base_url}}/sendMessage`\n\n#### Request Body\n\nThe request body must be in JSON format and include the following parameters:\n\n- **conversationId** (string, optional): The identifier for the conversation to which the message belongs. If not specified, the message will be sent without associating it with a specific conversation.\n    \n- **to** (string, required): The unique identifier of the recipient to whom the message is being sent.\n    \n- **text** (string, required): The content of the message that is being sent.\n    \n\n**Example Request Body:**\n\n``` json\n{\n  \"conversationId\": null,\n  \"to\": \"68cb789a80c5f60c994cb244\",\n  \"text\": \"a test text\"\n}\n\n ```\n\n### Response\n\nThe response will contain information regarding the status of the message delivery. The structure of the response may include:\n\n- **status** (string): Indicates the success or failure of the message sending operation.\n    \n- **messageId** (string): A unique identifier for the sent message, if applicable.\n    \n- **error** (string, optional): Provides details about any error that occurred during the message sending process.\n    \n\n### Example Response\n\n``` json\n{\n  \"status\": \"success\",\n  \"messageId\": \"1234567890\",\n  \"error\": null\n}\n\n ```\n\nThis API is essential for applications that require real-time messaging capabilities, enhancing user interaction and engagement."
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {

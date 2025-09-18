@@ -102,4 +102,8 @@ export class ChatService {
 
     return messages;
   }
+
+  async function notifyParticipants(conversation:ConversationDocument){
+      // this.client.emit('chat.notification', );
+  }
 }
