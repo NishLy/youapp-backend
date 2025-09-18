@@ -1,0 +1,377 @@
+{
+	"info": {
+		"_postman_id": "bad6f3f1-d6cb-4071-a849-45b5c9d4f500",
+		"name": "You App Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35072166"
+	},
+	"item": [
+		{
+			"name": "Api",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\" :\"{{$randomUserName}}\",\r\n    \"password\" : \"12345678\",\r\n    \"confirmPassword\" : \"12345678\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\" :\"{{$randomUserName}}\",\r\n    \"password\" : \"12345678\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "270"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10e-IUkdar39d+yg3i2J3+TOoYnAIGU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Sep 2025 03:17:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userName\": \"Jamal_Gerhold\",\n    \"email\": \"Jesse.Pagac52@gmail.com\",\n    \"password\": \"$2b$10$n3I9kckhXOPnMKd2CwNh6OryhHYuLFBvVkbTZw76pFB38vUxXcaae\",\n    \"interests\": [],\n    \"_id\": \"68cb79dec3c7754caf56612e\",\n    \"createdAt\": \"2025-09-18T03:17:50.978Z\",\n    \"updatedAt\": \"2025-09-18T03:17:50.978Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usernameOrEmail\" : \"Santa.Bernier@hotmail.com\",\r\n    \"password\" : \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unedited Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/profile",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c5-DPeaMt7ZOLxHoiuEd3DpK7cauVU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Sep 2025 04:10:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"68cb81c62938692d21f2059e\",\n    \"userName\": \"Amber.Herman\",\n    \"email\": \"Santa.Bernier@hotmail.com\",\n    \"interests\": [],\n    \"createdAt\": \"2025-09-18T03:51:34.697Z\",\n    \"updatedAt\": \"2025-09-18T03:51:34.697Z\",\n    \"__v\": 0\n}"
+						},
+						{
+							"name": "Edited",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/profile",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "393"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"189-rE01WlhknbpjI8JH/RblxxTTjmk\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Sep 2025 04:26:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"68cb81c62938692d21f2059e\",\n    \"userName\": \"Amber.Herman\",\n    \"email\": \"Santa.Bernier@hotmail.com\",\n    \"interests\": [\n        \"Progamming\",\n        \"Traveling\",\n        \"Sport\"\n    ],\n    \"createdAt\": \"2025-09-18T03:51:34.697Z\",\n    \"updatedAt\": \"2025-09-18T04:25:52.241Z\",\n    \"__v\": 0,\n    \"birthDate\": \"2024-12-02T06:45:01.000Z\",\n    \"displayName\": \"Roberto Kilback\",\n    \"gender\": \"male\",\n    \"height\": 170,\n    \"weight\": 70,\n    \"horoscopeSign\": \"Sagittarius\",\n    \"zodiacSign\": \"Dragon\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\": \"{{$randomFullName}}\",\r\n    \"gender\" : \"male\",\r\n    \"birthDate\" : \"{{$randomDatePast}}\",\r\n    \"height\": 170,\r\n    \"weight\": 70,\r\n    \"interests\": [\"Progamming\",\"Traveling\",\"Sport\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"displayName\": \"{{$randomFullName}}\",\r\n    \"gender\" : \"male\",\r\n    \"birthDate\" : \"{{$randomDatePast}}\",\r\n    \"height\": 170,\r\n    \"weight\": 70,\r\n    \"interests\": [\"Progamming\",\"Traveling\",\"Sport\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/profile",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "393"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"189-rE01WlhknbpjI8JH/RblxxTTjmk\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Sep 2025 04:25:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"68cb81c62938692d21f2059e\",\n    \"userName\": \"Amber.Herman\",\n    \"email\": \"Santa.Bernier@hotmail.com\",\n    \"interests\": [\n        \"Progamming\",\n        \"Traveling\",\n        \"Sport\"\n    ],\n    \"createdAt\": \"2025-09-18T03:51:34.697Z\",\n    \"updatedAt\": \"2025-09-18T04:25:52.241Z\",\n    \"__v\": 0,\n    \"birthDate\": \"2024-12-02T06:45:01.000Z\",\n    \"displayName\": \"Roberto Kilback\",\n    \"gender\": \"male\",\n    \"height\": 170,\n    \"weight\": 70,\n    \"horoscopeSign\": \"Sagittarius\",\n    \"zodiacSign\": \"Dragon\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
