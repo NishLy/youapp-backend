@@ -5,7 +5,7 @@ export type ConversationDocument = Conversation & Document;
 
 @Schema({ timestamps: true })
 export class Conversation {
-  @Prop({ required: true })
+  @Prop({ required: true, default: 'pair' })
   type: 'pair' | 'group';
   @Prop({ default: [] })
   participants: [string];
