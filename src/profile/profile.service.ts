@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Profile, ProfileDocument } from './schemas/profile.schema';
 import { CreateProfileDto } from './dtos/profile.create.dto';
 import { UpdateProfileDto } from './dtos/profile.update.dto';
@@ -57,25 +57,23 @@ export class ProfileService {
   }
 
   async update(
-    userId: string,
+    profileId: string,
     updateProfileDto: UpdateProfileDto,
   ): Promise<Profile> {
     const updatePayload: any = { ...updateProfileDto };
 
     if (updateProfileDto.birthDate) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      updatePayload.horoscope = calculateHoroscope(
-        new Date(updateProfileDto.birthDate as Date),
+      updatePayload.horoscopeSign = calculateHoroscope(
+        updateProfileDto.birthDate,
       );
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      updatePayload.zodiac = calculateZodiac(
-        new Date(updateProfileDto.birthDate as Date),
-      );
+      updatePayload.zodiacSign = calculateZodiac(updateProfileDto.birthDate);
     }
 
     const profile = await this.profileModel.findOneAndUpdate(
-      { userId },
-      { $set: updateProfileDto },
+      new Types.ObjectId(profileId),
+      { $set: updatePayload as UpdateProfileDto },
       { new: true },
     );
 

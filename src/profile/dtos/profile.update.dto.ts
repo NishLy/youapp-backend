@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsString,
   IsOptional,
@@ -17,9 +18,10 @@ export class UpdateProfileDto {
   @IsOptional()
   gender;
 
-  @IsDate()
   @IsOptional()
-  birthDate;
+  @Type(() => Date)
+  @IsDate()
+  birthDate?: Date;
 
   @IsArray()
   @IsOptional()
