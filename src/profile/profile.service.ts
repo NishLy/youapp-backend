@@ -5,6 +5,7 @@ import { Profile, ProfileDocument } from './schemas/profile.schema';
 import { CreateProfileDto } from './dtos/profile.create.dto';
 import { UpdateProfileDto } from './dtos/profile.update.dto';
 import { calculateHoroscope, calculateZodiac } from 'src/utils/zodiac/helper';
+import { hashPassword } from 'src/utils/hash';
 
 @Injectable()
 export class profileService {
@@ -13,6 +14,8 @@ export class profileService {
   ) {}
 
   async create(profile: CreateProfileDto): Promise<Profile> {
+    profile.password = await hashPassword(profile.password);
+
     const newProfile = new this.profileModel(profile);
     return newProfile.save();
   }

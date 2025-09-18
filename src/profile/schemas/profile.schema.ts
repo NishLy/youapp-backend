@@ -9,13 +9,13 @@ export class Profile {
   userName: string;
   @Prop({ required: true, unique: true })
   email: string;
-  @Prop({ required: true })
+  @Prop({ required: true, select: false })
   password: string;
-  @Prop({ required: true })
+  @Prop()
   displayName: string;
-  @Prop({ required: true })
+  @Prop()
   gender: string;
-  @Prop({ required: true })
+  @Prop()
   birthDate: Date;
   @Prop()
   zodiacSign: string;

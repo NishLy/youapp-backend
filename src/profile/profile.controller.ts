@@ -7,17 +7,17 @@ import { UpdateProfileDto } from './dtos/profile.update.dto';
 export class ProfileController {
   constructor(private readonly profileService: profileService) {}
 
-  @Post('createProfile')
+  @Post('register')
   create(@Body() createProfileDto: CreateProfileDto) {
     return this.profileService.create(createProfileDto);
   }
 
-  @Get('getProfile/:userId')
+  @Get('profile')
   findByUserId(@Param('userId') userId: string) {
     return this.profileService.findByUserId(userId);
   }
 
-  @Put('updateProfile/:userId')
+  @Put('profile')
   update(
     @Param('userId') userId: string,
     @Body() updateProfileDto: UpdateProfileDto,
