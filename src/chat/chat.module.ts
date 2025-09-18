@@ -2,7 +2,10 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Conversation, ConversationSchema } from './schemas/conversation.shema';
 import { Message, MessageSchema } from './schemas/message.schema';
-import { NotificationSchema } from './schemas/notification.schema';
+import {
+  NotificationSchema,
+  Notification,
+} from './schemas/notification.schema';
 
 @Module({
   imports: [

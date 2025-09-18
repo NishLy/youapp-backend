@@ -9,8 +9,8 @@ export class Conversation {
   type: 'pair' | 'group';
   @Prop({ default: [] })
   participants: [string];
-  @Prop({ required: true, default: { title: 'untitled' } })
-  metadata: { title?: string };
+  @Prop({ type: Object, default: {} })
+  metadata: Record<string, any>;
   @Prop({ required: true, default: new Date() })
   lastMessageAt: Date;
 }
