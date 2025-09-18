@@ -4,12 +4,15 @@ import {
   Get,
   Put,
   Body,
-  Param,
   BadRequestException,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { CreateProfileDto } from './dtos/profile.create.dto';
 import { ProfileService } from './profile.service';
 import { UpdateProfileDto } from './dtos/profile.update.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthJWTPayload } from 'src/auth/types/auth';
 
 @Controller('api')
 export class ProfileController {
@@ -22,16 +25,20 @@ export class ProfileController {
     return this.profileService.create(createProfileDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get('profile')
-  findByUserId(@Param('userId') userId: string) {
-    return this.profileService.findByUserId(userId);
+  findByUserId(@Req() req: Request & { user: AuthJWTPayload }) {
+    const profileId = req.user.id;
+    return this.profileService.findByUserId(profileId);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Put('profile')
-  update(
-    @Param('userId') userId: string,
+  async update(
     @Body() updateProfileDto: UpdateProfileDto,
+    @Req() req: Request & { user: AuthJWTPayload },
   ) {
-    return this.profileService.update(userId, updateProfileDto);
+    const profileId = req.user.id;
+    return this.profileService.update(profileId, updateProfileDto);
   }
 }
