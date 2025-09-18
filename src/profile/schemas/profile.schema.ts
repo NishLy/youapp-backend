@@ -13,7 +13,7 @@ export class Profile {
   password: string;
   @Prop()
   displayName: string;
-  @Prop()
+  @Prop({ enum: ['male', 'female'] })
   gender: string;
   @Prop()
   birthDate: Date;
