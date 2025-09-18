@@ -8,7 +8,7 @@ export class Conversation {
   @Prop({ required: true, default: 'pair' })
   type: 'pair' | 'group';
   @Prop({ default: [] })
-  participants: [string];
+  participants: string[];
   @Prop({ type: Object, default: {} })
   metadata: Record<string, any>;
   @Prop({ required: true, default: new Date() })

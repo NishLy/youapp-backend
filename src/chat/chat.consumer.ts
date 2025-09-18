@@ -10,10 +10,13 @@ export class ChatConsumer {
   @EventPattern('chat.message')
   async handleChatMessage(@Payload() data: SendMessageDto & { from: string }) {
     const conversation = await this.chatService.findOrCreateConversation(
+      data.from,
       data.conversationId,
     );
 
-    const message = await this.chatService.createMessage(
+    if (data.to) await this.chatService.addToParticipant(conversation, data.to);
+
+    await this.chatService.createMessage(
       String(conversation._id),
       data,
       data.from,

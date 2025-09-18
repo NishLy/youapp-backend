@@ -27,6 +27,7 @@ export class ChatService {
   ) {}
 
   async findOrCreateConversation(
+    profileId: string,
     conversationId?: string,
   ): Promise<ConversationDocument> {
     if (conversationId && Types.ObjectId.isValid(conversationId)) {
@@ -39,7 +40,18 @@ export class ChatService {
     }
 
     // create a new empty conversation
-    return this.conversationModel.create({});
+    return this.conversationModel.create({ participants: [profileId] });
+  }
+
+  async addToParticipant(
+    conversation: ConversationDocument,
+    profileId: string,
+  ) {
+    conversation.participants = Array.from(
+      new Set([...conversation.participants, profileId]),
+    );
+
+    return conversation.save();
   }
 
   async createMessage(
@@ -52,5 +64,42 @@ export class ChatService {
 
   produceMessageQueue(data: SendMessageDto, from: string) {
     this.client.emit('chat.message', { ...data, from });
+  }
+
+  // view messages
+  async viewMessages(
+    profileId: string,
+    conversationId?: string,
+    page: number = 1,
+    limit: number = 15,
+  ) {
+    let conversationIds: string[] = [];
+
+    if (conversationId) {
+      conversationIds = [conversationId];
+    } else {
+      const conversations = await this.conversationModel
+        .find({ participants: profileId })
+        .select('_id')
+        .exec();
+
+      conversationIds = conversations.map((c) =>
+        (c._id as Types.ObjectId).toString(),
+      );
+    }
+
+    if (conversationIds.length === 0) {
+      return []; // no conversations, return empty
+    }
+
+    // Find all messages for those conversations
+    const messages = await this.messageModel
+      .find({ conversationId: { $in: conversationIds } })
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .exec();
+
+    return messages;
   }
 }
