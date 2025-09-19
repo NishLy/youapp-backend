@@ -1,0 +1,225 @@
+openapi: 3.0.0
+info:
+  title: You App Backend
+  version: 1.0.0
+  description: ""
+servers:
+  - url: "{{base_url}}"
+paths:
+  /register:
+    parameters: []
+    post:
+      summary: Register
+      tags: &ref_0
+        - Api
+      parameters: []
+      responses:
+        "201":
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+              example: Express
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+              example: "270"
+            ETag:
+              schema:
+                type: string
+              example: W/"10e-IUkdar39d+yg3i2J3+TOoYnAIGU"
+            Date:
+              schema:
+                type: string
+              example: Thu, 18 Sep 2025 03:17:50 GMT
+            Connection:
+              schema:
+                type: string
+              example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+              example: timeout=5
+          description: New Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                password:
+                  type: string
+                  format: utc-millisec
+                confirmPassword:
+                  type: string
+                  format: utc-millisec
+                email:
+                  type: string
+            example:
+              userName: "{{$randomUserName}}"
+              password: "12345678"
+              confirmPassword: "12345678"
+              email: "{{$randomEmail}}"
+  /login:
+    parameters: []
+    post:
+      summary: Login
+      tags: *ref_0
+      parameters: []
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                usernameOrEmail:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: utc-millisec
+            example:
+              usernameOrEmail: Santa.Bernier@hotmail.com
+              password: "12345678"
+  /profile:
+    parameters: []
+    get:
+      summary: Get Profile
+      tags: *ref_0
+      parameters: []
+      responses:
+        "200":
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+              example: Express
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+              example: "197"
+            ETag:
+              schema:
+                type: string
+              example: W/"c5-DPeaMt7ZOLxHoiuEd3DpK7cauVU"
+            Date:
+              schema:
+                type: string
+              example: Thu, 18 Sep 2025 04:10:54 GMT
+            Connection:
+              schema:
+                type: string
+              example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+              example: timeout=5
+          description: Unedited Profile
+    put:
+      summary: Update Profile
+      tags: *ref_0
+      parameters: []
+      responses:
+        "200":
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+              example: Express
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+              example: "393"
+            ETag:
+              schema:
+                type: string
+              example: W/"189-rE01WlhknbpjI8JH/RblxxTTjmk"
+            Date:
+              schema:
+                type: string
+              example: Thu, 18 Sep 2025 04:25:52 GMT
+            Connection:
+              schema:
+                type: string
+              example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+              example: timeout=5
+          description: New Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                gender:
+                  type: string
+                birthDate:
+                  type: string
+                height:
+                  type: integer
+                weight:
+                  type: integer
+                interests:
+                  type: array
+                  items:
+                    type: string
+            example:
+              displayName: "{{$randomFullName}}"
+              gender: male
+              birthDate: "{{$randomDatePast}}"
+              height: 170
+              weight: 70
+              interests:
+                - Progamming
+                - Traveling
+                - Sport
+  /sendMessage:
+    parameters: []
+    post:
+      summary: Send Message
+      tags: &ref_1
+        - Message
+      parameters: []
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                conversationId:
+                  nullable: true
+                to:
+                  type: string
+                text:
+                  type: string
+            example:
+              conversationId: null
+              to: 68cb789a80c5f60c994cb244
+              text: a test text
+  /viewMessages:
+    parameters: []
+    get:
+      summary: VIew Messages
+      tags: *ref_1
+      parameters: []
+      responses: {}
