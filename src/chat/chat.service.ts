@@ -13,6 +13,14 @@ import {
 import { SendMessageDto } from './dtos/chat.send-message.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { Types } from 'mongoose';
+import {
+  createNotificationDto,
+  NotificationTypeEnum,
+} from './dtos/chat.notification.dto';
+
+function sliceText(str: string) {
+  return str.length > 50 ? str.slice(0, 50) + '...' : str;
+}
 
 @Injectable()
 export class ChatService {
@@ -103,7 +111,23 @@ export class ChatService {
     return messages;
   }
 
-  async function notifyParticipants(conversation:ConversationDocument){
-      // this.client.emit('chat.notification', );
+  notifyMessage(profileId: string, message: MessageDocument) {
+    const payload: createNotificationDto = {
+      profileId,
+      body: sliceText(message.text ?? ''),
+      type: NotificationTypeEnum.MESSAGE,
+    };
+
+    this.client.emit('chat.notification', payload);
+  }
+
+  async saveNotification(data: createNotificationDto) {
+    const payload = {
+      ...data,
+      deliveredAt: new Date(),
+      status: 'unread',
+    };
+
+    await this.notificationModel.create(payload);
   }
 }

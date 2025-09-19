@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import { ChatService } from './chat.service';
 import { SendMessageDto } from './dtos/chat.send-message.dto';
+import { createNotificationDto } from './dtos/chat.notification.dto';
 
 @Controller()
 export class ChatConsumer {
@@ -16,10 +17,23 @@ export class ChatConsumer {
 
     if (data.to) await this.chatService.addToParticipant(conversation, data.to);
 
-    await this.chatService.createMessage(
+    const message = await this.chatService.createMessage(
       String(conversation._id),
       data,
       data.from,
     );
+
+    // filter out sender
+    const recipients = conversation.participants.filter((e) => e != data.from);
+
+    // broadcast to participants notification
+    for (const id of recipients) {
+      this.chatService.notifyMessage(id, message);
+    }
+  }
+
+  @EventPattern('chat.notification')
+  async handleNotification(@Payload() data: createNotificationDto) {
+    await this.chatService.saveNotification(data);
   }
 }

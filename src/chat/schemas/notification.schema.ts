@@ -6,7 +6,7 @@ export type NotificationDocument = Notification & Document;
 @Schema({ timestamps: true })
 export class Notification {
   @Prop({ required: true })
-  userId: string;
+  profileId: string;
   @Prop({ required: true })
   type: 'message' | 'friend_request' | 'system' | 'other';
   @Prop({ type: String })
