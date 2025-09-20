@@ -22,7 +22,7 @@ export class Profile {
   @Prop()
   horoscopeSign: string;
   @Prop()
-  avatarUrl: string;
+  photoUrl: string;
   @Prop({ default: [] })
   interests: [string];
   @Prop()

@@ -1,20 +1,8 @@
-import { IsString, IsNotEmpty, MinLength, IsEmail } from 'class-validator';
+import { IsString, IsOptional, IsArray } from 'class-validator';
 
 export class CreateProfileDto {
-  @IsString()
-  @IsNotEmpty()
-  userName: string;
-
-  @IsEmail()
-  email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(8)
-  password: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(8)
-  confirmPassword: string;
+  @IsArray()
+  @IsOptional()
+  @IsString({ each: true })
+  interests;
 }

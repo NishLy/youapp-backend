@@ -6,6 +6,7 @@ import { CreateProfileDto } from './dtos/profile.create.dto';
 import { UpdateProfileDto } from './dtos/profile.update.dto';
 import { calculateHoroscope, calculateZodiac } from 'src/utils/zodiac/helper';
 import { hashPassword } from 'src/utils/hash';
+import { AuthRegisterDto } from 'src/auth/dtos/auth.register.dto';
 
 @Injectable()
 export class ProfileService {
@@ -13,11 +14,25 @@ export class ProfileService {
     @InjectModel(Profile.name) private profileModel: Model<ProfileDocument>,
   ) {}
 
-  async create(profile: CreateProfileDto): Promise<Profile> {
+  async register(profile: AuthRegisterDto): Promise<Profile> {
     profile.password = await hashPassword(profile.password);
 
     const newProfile = new this.profileModel(profile);
     return newProfile.save();
+  }
+
+  async create(
+    profileId: string,
+    updatePayload: CreateProfileDto,
+  ): Promise<Profile> {
+    const profile = await this.profileModel.findOneAndUpdate(
+      new Types.ObjectId(profileId),
+      { $set: updatePayload },
+      { new: true },
+    );
+
+    if (!profile) throw new NotFoundException('Profile not found');
+    return profile;
   }
 
   async findByUserId(userId: string): Promise<Profile> {

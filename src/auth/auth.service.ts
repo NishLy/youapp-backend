@@ -6,6 +6,7 @@ import { isEmail } from 'class-validator';
 import { comparePassword } from 'src/utils/hash';
 import { AuthJWTPayload } from './types/auth';
 import { JwtService } from '@nestjs/jwt';
+import { AuthRegisterDto } from './dtos/auth.register.dto';
 
 @Injectable()
 export class AuthService {
@@ -45,5 +46,9 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+  async register(data: AuthRegisterDto) {
+    return await this.profileService.register(data);
   }
 }
