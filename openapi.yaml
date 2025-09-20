@@ -2,9 +2,9 @@ openapi: 3.0.0
 info:
   title: You App Backend
   version: 1.0.0
-  description: ""
+  description: ''
 servers:
-  - url: "{{base_url}}"
+  - url: '{{base_url}}'
 paths:
   /register:
     parameters: []
@@ -14,7 +14,7 @@ paths:
         - Api
       parameters: []
       responses:
-        "201":
+        '201':
           headers:
             X-Powered-By:
               schema:
@@ -27,7 +27,7 @@ paths:
             Content-Length:
               schema:
                 type: integer
-              example: "270"
+              example: '270'
             ETag:
               schema:
                 type: string
@@ -62,10 +62,10 @@ paths:
                 email:
                   type: string
             example:
-              userName: "{{$randomUserName}}"
-              password: "12345678"
-              confirmPassword: "12345678"
-              email: "{{$randomEmail}}"
+              userName: '{{$randomUserName}}'
+              password: '12345678'
+              confirmPassword: '12345678'
+              email: '{{$randomEmail}}'
   /login:
     parameters: []
     post:
@@ -87,7 +87,7 @@ paths:
                   format: utc-millisec
             example:
               usernameOrEmail: Santa.Bernier@hotmail.com
-              password: "12345678"
+              password: '12345678'
   /profile:
     parameters: []
     get:
@@ -95,7 +95,7 @@ paths:
       tags: *ref_0
       parameters: []
       responses:
-        "200":
+        '200':
           headers:
             X-Powered-By:
               schema:
@@ -108,7 +108,7 @@ paths:
             Content-Length:
               schema:
                 type: integer
-              example: "197"
+              example: '197'
             ETag:
               schema:
                 type: string
@@ -131,7 +131,7 @@ paths:
       tags: *ref_0
       parameters: []
       responses:
-        "200":
+        '200':
           headers:
             X-Powered-By:
               schema:
@@ -144,7 +144,7 @@ paths:
             Content-Length:
               schema:
                 type: integer
-              example: "393"
+              example: '393'
             ETag:
               schema:
                 type: string
@@ -183,9 +183,9 @@ paths:
                   items:
                     type: string
             example:
-              displayName: "{{$randomFullName}}"
+              displayName: '{{$randomFullName}}'
               gender: male
-              birthDate: "{{$randomDatePast}}"
+              birthDate: '{{$randomDatePast}}'
               height: 170
               weight: 70
               interests:

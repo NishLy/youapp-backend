@@ -10,6 +10,14 @@
 			"name": "Api",
 			"item": [
 				{
+					"name": "Auth",
+					"item": []
+				},
+				{
+					"name": "Profile",
+					"item": []
+				},
+				{
 					"name": "Register",
 					"request": {
 						"method": "POST",
@@ -330,56 +338,6 @@
 							"body": "{\n    \"_id\": \"68cb81c62938692d21f2059e\",\n    \"userName\": \"Amber.Herman\",\n    \"email\": \"Santa.Bernier@hotmail.com\",\n    \"interests\": [\n        \"Progamming\",\n        \"Traveling\",\n        \"Sport\"\n    ],\n    \"createdAt\": \"2025-09-18T03:51:34.697Z\",\n    \"updatedAt\": \"2025-09-18T04:25:52.241Z\",\n    \"__v\": 0,\n    \"birthDate\": \"2024-12-02T06:45:01.000Z\",\n    \"displayName\": \"Roberto Kilback\",\n    \"gender\": \"male\",\n    \"height\": 170,\n    \"weight\": 70,\n    \"horoscopeSign\": \"Sagittarius\",\n    \"zodiacSign\": \"Dragon\"\n}"
 						}
 					]
-				}
-			]
-		},
-		{
-			"name": "Message",
-			"item": [
-				{
-					"name": "Send Message",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"conversationId\" : null,\r\n    \"to\": \"68cb789a80c5f60c994cb244\",   \r\n    \"text\":\"a test text\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/sendMessage",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"sendMessage"
-							]
-						},
-						"description": "## Send Message API\n\nThis endpoint allows users to send a message to a specified recipient within a conversation. It is designed to facilitate communication by enabling the transmission of text messages.\n\n### Request\n\n**Method:** POST  \n**Endpoint:** `{{base_url}}/sendMessage`\n\n#### Request Body\n\nThe request body must be in JSON format and include the following parameters:\n\n- **conversationId** (string, optional): The identifier for the conversation to which the message belongs. If not specified, the message will be sent without associating it with a specific conversation.\n    \n- **to** (string, required): The unique identifier of the recipient to whom the message is being sent.\n    \n- **text** (string, required): The content of the message that is being sent.\n    \n\n**Example Request Body:**\n\n``` json\n{\n  \"conversationId\": null,\n  \"to\": \"68cb789a80c5f60c994cb244\",\n  \"text\": \"a test text\"\n}\n\n ```\n\n### Response\n\nThe response will contain information regarding the status of the message delivery. The structure of the response may include:\n\n- **status** (string): Indicates the success or failure of the message sending operation.\n    \n- **messageId** (string): A unique identifier for the sent message, if applicable.\n    \n- **error** (string, optional): Provides details about any error that occurred during the message sending process.\n    \n\n### Example Response\n\n``` json\n{\n  \"status\": \"success\",\n  \"messageId\": \"1234567890\",\n  \"error\": null\n}\n\n ```\n\nThis API is essential for applications that require real-time messaging capabilities, enhancing user interaction and engagement."
-					},
-					"response": []
-				},
-				{
-					"name": "VIew Messages",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/viewMessages",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"viewMessages"
-							]
-						},
-						"description": "## Send Message API\n\nThis endpoint allows users to send a message to a specified recipient within a conversation. It is designed to facilitate communication by enabling the transmission of text messages.\n\n### Request\n\n**Method:** POST  \n**Endpoint:** `{{base_url}}/sendMessage`\n\n#### Request Body\n\nThe request body must be in JSON format and include the following parameters:\n\n- **conversationId** (string, optional): The identifier for the conversation to which the message belongs. If not specified, the message will be sent without associating it with a specific conversation.\n    \n- **to** (string, required): The unique identifier of the recipient to whom the message is being sent.\n    \n- **text** (string, required): The content of the message that is being sent.\n    \n\n**Example Request Body:**\n\n``` json\n{\n  \"conversationId\": null,\n  \"to\": \"68cb789a80c5f60c994cb244\",\n  \"text\": \"a test text\"\n}\n\n ```\n\n### Response\n\nThe response will contain information regarding the status of the message delivery. The structure of the response may include:\n\n- **status** (string): Indicates the success or failure of the message sending operation.\n    \n- **messageId** (string): A unique identifier for the sent message, if applicable.\n    \n- **error** (string, optional): Provides details about any error that occurred during the message sending process.\n    \n\n### Example Response\n\n``` json\n{\n  \"status\": \"success\",\n  \"messageId\": \"1234567890\",\n  \"error\": null\n}\n\n ```\n\nThis API is essential for applications that require real-time messaging capabilities, enhancing user interaction and engagement."
-					},
-					"response": []
 				}
 			]
 		}
